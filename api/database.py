@@ -11,6 +11,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from pymongo import MongoClient
 from . import config
+from .models.add_relation_model import add_relationships_to_existing_models
 
 
 @lru_cache()
@@ -39,6 +40,7 @@ def get_db():
     """
     Gets database session.
     """
+    add_relationships_to_existing_models()
     db_session = SessionLocal()
     try:
         yield db_session
