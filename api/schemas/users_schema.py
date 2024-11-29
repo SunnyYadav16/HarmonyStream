@@ -5,44 +5,12 @@
 # 2.Related Library Imports
 # 3.Local application/library imports
 #--------------------------------------------#
-from typing import List
-from pydantic import BaseModel
-from api.schemas import items_schema, tasks_schema
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
 
 from api.schemas.role_schema import RoleResponse
 
-
-# class UserBase(BaseModel):
-#     """
-#     User Base Schema.
-#     """
-#     email: str
-#
-#
-# class UserCreate(UserBase):
-#     """
-#     User Create Schema.
-#     """
-#     password: str
-#
-#
-# class User(UserBase):
-#     """
-#     User Schema.
-#     """
-#     id: int
-#     is_active: bool
-#     items: List[items_schema.Item] = []
-#     tasks: List[tasks_schema.Task] = []
-#
-#     class Config:
-#         """
-#         Object Relational Mapping Mode.
-#         """
-#         orm_mode = True
 
 class UserBase(BaseModel):
     first_name: str = Field(..., min_length=2, max_length=255)

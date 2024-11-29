@@ -1,5 +1,5 @@
 import enum
-from sqlalchemy import Column, Integer, String, DateTime, Enum, Boolean, Time
+from sqlalchemy import Column, Integer, String, DateTime, Enum, Boolean, Time, Index
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -14,6 +14,11 @@ class MediaTypeEnum(enum.Enum):
 
 class Media(Base):
     __tablename__ = "media"
+    __table_args__ = (
+        Index('idx_media_title', 'media_title'),
+        Index('idx_media_type', 'media_type'),
+        Index('idx_media_view_count', 'view_count'),
+    )
 
     media_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     media_title = Column(String(255), nullable=False, unique=True)

@@ -1,11 +1,15 @@
 
-from sqlalchemy import Column, Integer, DateTime, ForeignKey, Text
+from sqlalchemy import Column, Integer, DateTime, ForeignKey, Text, Index
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from api.database import Base
 
 class Comment(Base):
     __tablename__ = "comments"
+    __table_args__ = (
+        Index('idx_comments_user_id', 'user_id'),
+        Index('idx_comments_media_id', 'media_id'),
+    )
 
     comment_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.user_id', ondelete='CASCADE'), nullable=False)
