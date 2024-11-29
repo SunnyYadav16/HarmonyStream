@@ -1,4 +1,3 @@
-from pydantic import BaseModel, ConfigDict
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from api.database import Base
@@ -13,13 +12,3 @@ class UserArtist(Base):
     # Relationships
     follower = relationship("User")
     artist = relationship("Artist")
-
-class UserArtistBase(BaseModel):
-    follower_id: int
-    artist_id: int
-
-class UserArtistCreate(UserArtistBase):
-    pass
-
-class UserArtistResponse(UserArtistBase):
-    model_config = ConfigDict(from_attributes=True)

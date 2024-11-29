@@ -1,7 +1,4 @@
-from datetime import datetime
-from typing import Optional
 
-from pydantic import BaseModel, Field, ConfigDict
 from sqlalchemy import Column, Integer, DateTime, ForeignKey, CheckConstraint
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -28,21 +25,3 @@ class Rating(Base):
         CheckConstraint('rating BETWEEN 1 AND 5', name='valid_rating_range'),
     )
 
-
-class RatingBase(BaseModel):
-    user_id: int
-    media_id: int
-    rating: int = Field(..., ge=1, le=5)
-
-
-class RatingCreate(RatingBase):
-    pass
-
-
-class RatingResponse(RatingBase):
-    rating_id: int
-    created_at: datetime
-    updated_at: datetime
-    deleted_at: Optional[datetime]
-
-    model_config = ConfigDict(from_attributes=True)

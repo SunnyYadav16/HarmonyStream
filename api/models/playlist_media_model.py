@@ -1,4 +1,3 @@
-from pydantic import BaseModel, ConfigDict
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from api.database import Base
@@ -13,13 +12,3 @@ class PlaylistMedia(Base):
     # Relationships
     playlist = relationship("Playlist")
     media = relationship("Media")
-
-class PlaylistMediaBase(BaseModel):
-    playlist_id: int
-    media_id: int
-
-class PlaylistMediaCreate(PlaylistMediaBase):
-    pass
-
-class PlaylistMediaResponse(PlaylistMediaBase):
-    model_config = ConfigDict(from_attributes=True)
