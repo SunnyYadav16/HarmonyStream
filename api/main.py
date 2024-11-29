@@ -1,17 +1,20 @@
 """Application main."""
-#--------------------------------------------#
+# --------------------------------------------#
 # PEP-8 Imports Priority.
 # 1.Standard Library Imports
 # 2.Related Library Imports
 # 3.Local application/library imports
-#--------------------------------------------#
+# --------------------------------------------#
 import os
 from functools import lru_cache
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
-from api.routers import async_router, users, items, tasks, stream, questions
-from . import database, config
+
+from api import database, config
+
+# from api.routers import async_router, users, items, tasks, stream, questions
 
 database.Base.metadata.create_all(bind=database.engine)
 
