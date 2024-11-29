@@ -5,13 +5,17 @@
 # 2.Related Library Imports
 # 3.Local application/library imports
 #--------------------------------------------#
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func, Boolean, Index
 from sqlalchemy.orm import relationship
 from api.database import Base
 
 
 class User(Base):
     __tablename__ = "users"
+    __table_args__ = (
+        Index('idx_users_username', 'username'),
+        Index('idx_users_email', 'email'),
+    )
 
     user_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     first_name = Column(String(255), nullable=False)

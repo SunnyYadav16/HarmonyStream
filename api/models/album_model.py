@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, CheckConstraint
+from sqlalchemy import Column, Integer, String, Text, DateTime, CheckConstraint, Index
 from sqlalchemy.sql import func
 
 from api.database import Base
@@ -7,6 +7,11 @@ from api.database import Base
 # SQLAlchemy Models
 class Album(Base):
     __tablename__ = "albums"
+    __table_args__ = (
+        Index('idx_albums_title', 'album_title'),
+        CheckConstraint('album_title IS NOT NULL', name='album_title_not_null'),
+        CheckConstraint('release_date IS NOT NULL', name='release_date_not_null'),
+    )
 
     album_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     album_title = Column(String(255), nullable=False)
@@ -17,8 +22,4 @@ class Album(Base):
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
     deleted_at = Column(DateTime, nullable=True)
 
-    __table_args__ = (
-        CheckConstraint('album_title IS NOT NULL', name='album_title_not_null'),
-        CheckConstraint('release_date IS NOT NULL', name='release_date_not_null'),
-    )
 

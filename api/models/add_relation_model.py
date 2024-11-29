@@ -1,15 +1,14 @@
-# Add these to your existing models to establish relationships
 from api.models.album_model import Album
 from api.models.artist_model import Artist
 from api.models.genre_model import Genre
 from api.models.media_model import Media
 from api.models.playlist_model import Playlist
 from api.models.user_model import User
+from sqlalchemy.orm import relationship
 
 
 def add_relationships_to_existing_models():
     # Example of how to add relationships to existing models
-    from sqlalchemy.orm import relationship
 
     # In Album model
     Album.media = relationship("MediaAlbum", back_populates="album")
