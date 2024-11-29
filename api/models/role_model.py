@@ -1,14 +1,9 @@
-from datetime import datetime
-from typing import Optional
 
-from pydantic import BaseModel, Field, ConfigDict
 from sqlalchemy import Column, Integer, String, DateTime, Text, func
 from sqlalchemy.orm import relationship
 
 from api.database import Base
 
-
-# SQLAlchemy Models
 class Role(Base):
     __tablename__ = "roles"
 
@@ -21,17 +16,3 @@ class Role(Base):
     # Relationship to users
     users = relationship("User", back_populates="role")
 
-# Pydantic Models for Request/Response Validation
-class RoleBase(BaseModel):
-    role_name: str = Field(..., min_length=2, max_length=255)
-    role_description: Optional[str] = None
-
-class RoleCreate(RoleBase):
-    pass
-
-class RoleResponse(RoleBase):
-    role_id: int
-    created_at: datetime
-    updated_at: datetime
-
-    model_config = ConfigDict(from_attributes=True)
