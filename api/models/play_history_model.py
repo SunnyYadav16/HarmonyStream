@@ -1,6 +1,4 @@
-from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict
 from sqlalchemy import Column, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -21,18 +19,3 @@ class PlayHistory(Base):
     user = relationship("User")
     media = relationship("Media")
 
-
-class PlayHistoryBase(BaseModel):
-    user_id: int
-    media_id: int
-
-
-class PlayHistoryCreate(PlayHistoryBase):
-    pass
-
-
-class PlayHistoryResponse(PlayHistoryBase):
-    history_id: int
-    played_at: datetime
-
-    model_config = ConfigDict(from_attributes=True)

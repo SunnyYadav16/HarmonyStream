@@ -1,7 +1,3 @@
-from datetime import datetime
-from typing import Optional
-
-from pydantic import BaseModel, ConfigDict
 from sqlalchemy import Column, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -22,21 +18,3 @@ class Favorite(Base):
     # Relationships
     user = relationship("User")
     media = relationship("Media", back_populates="favorites")
-
-
-class FavoriteBase(BaseModel):
-    user_id: int
-    media_id: int
-
-
-class FavoriteCreate(FavoriteBase):
-    pass
-
-
-class FavoriteResponse(FavoriteBase):
-    favorite_id: int
-    created_at: datetime
-    updated_at: datetime
-    deleted_at: Optional[datetime]
-
-    model_config = ConfigDict(from_attributes=True)

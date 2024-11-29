@@ -1,4 +1,3 @@
-from pydantic import BaseModel, ConfigDict
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from api.database import Base
@@ -13,14 +12,3 @@ class MediaGenre(Base):
     # Relationships
     media = relationship("Media")
     genre = relationship("Genre")
-
-
-class MediaGenreBase(BaseModel):
-    media_id: int
-    genre_id: int
-
-class MediaGenreCreate(MediaGenreBase):
-    pass
-
-class MediaGenreResponse(MediaGenreBase):
-    model_config = ConfigDict(from_attributes=True)

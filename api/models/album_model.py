@@ -1,7 +1,3 @@
-from datetime import date, datetime
-from typing import Optional
-
-from pydantic import BaseModel, Field, ConfigDict
 from sqlalchemy import Column, Integer, String, Text, DateTime, CheckConstraint
 from sqlalchemy.sql import func
 
@@ -26,23 +22,3 @@ class Album(Base):
         CheckConstraint('release_date IS NOT NULL', name='release_date_not_null'),
     )
 
-
-# Pydantic Models
-class AlbumBase(BaseModel):
-    album_title: str = Field(..., min_length=1, max_length=255)
-    release_date: Optional[date] = None
-    cover_art: Optional[str] = None
-    description: Optional[str] = None
-
-
-class AlbumCreate(AlbumBase):
-    pass
-
-
-class AlbumResponse(AlbumBase):
-    album_id: int
-    created_at: datetime
-    updated_at: datetime
-    deleted_at: Optional[datetime]
-
-    model_config = ConfigDict(from_attributes=True)
