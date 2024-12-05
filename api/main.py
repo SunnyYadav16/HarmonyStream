@@ -13,8 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
 from api import database, config
-
-# from api.routers import async_router, users, items, tasks, stream, questions
+from api.routers import users, media, search, favorites, playlist, playlist_media
 
 database.Base.metadata.create_all(bind=database.engine)
 
@@ -39,9 +38,12 @@ app.add_middleware(
     allow_headers=conf_settings.ALLOW_HEADERS,
 )
 # app.include_router(async_router.router)
-# app.include_router(users.router)
-# app.include_router(items.router)
-# app.include_router(tasks.router)
+app.include_router(users.router)
+app.include_router(media.router)
+app.include_router(search.router)
+app.include_router(favorites.router)
+app.include_router(playlist.router)
+app.include_router(playlist_media.router)
 # app.include_router(stream.router)
 # app.include_router(questions.router)
 

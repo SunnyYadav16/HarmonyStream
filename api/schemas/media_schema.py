@@ -1,7 +1,7 @@
-from datetime import datetime, time
+from datetime import time
 from typing import Optional
 
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field
 
 from api.models.media_model import MediaTypeEnum
 
@@ -22,8 +22,5 @@ class MediaCreate(MediaBase):
 
 class MediaResponse(MediaBase):
     media_id: int
-    created_at: datetime
-    updated_at: datetime
-    deleted_at: Optional[datetime]
 
-    model_config = ConfigDict(from_attributes=True)
+    # model_config = ConfigDict(from_attributes=True)

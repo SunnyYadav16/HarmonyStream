@@ -17,8 +17,3 @@ class AlbumCreate(AlbumBase):
 
 class AlbumResponse(AlbumBase):
     album_id: int
-    created_at: datetime
-    updated_at: datetime
-    deleted_at: Optional[datetime]
-
-    model_config = ConfigDict(from_attributes=True)

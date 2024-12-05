@@ -22,3 +22,4 @@ class Playlist(Base):
 
     # Relationships
     user = relationship("User")
+    playlist_media = relationship("PlaylistMedia", back_populates="playlist")

@@ -1,15 +1,18 @@
 import enum
-from sqlalchemy import Column, Integer, String, DateTime, Enum, Boolean, Time, Index
+
+from sqlalchemy import Column, Integer, String, DateTime, Enum, Boolean, Index, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-
+from api.models.favorite_model import Favorite
+from api.models.comment_model import Comment
+from api.models.rating_model import Rating
 from api.database import Base
 
 
 # Enum for Media Type
 class MediaTypeEnum(enum.Enum):
-    AUDIO = 'audio'
-    VIDEO = 'video'
+    AUDIO = 'AUDIO'
+    VIDEO = 'VIDEO'
 
 
 class Media(Base):
@@ -21,10 +24,10 @@ class Media(Base):
     )
 
     media_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    media_title = Column(String(255), nullable=False, unique=True)
+    media_title = Column(String(255), nullable=False)
     media_type = Column(Enum(MediaTypeEnum), nullable=False)
-    duration = Column(Time, nullable=True)
-    s3_media_path = Column(String(255), nullable=True)
+    duration = Column(Integer, nullable=True)
+    s3_media_path = Column(Text, nullable=True)
     thumbnail_image_path = Column(String(255), nullable=True)
     view_count = Column(Integer, default=0)
     is_premium_only = Column(Boolean, default=False)

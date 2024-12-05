@@ -8,6 +8,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func, Boolean, Index
 from sqlalchemy.orm import relationship
 from api.database import Base
+from api.models.role_model import Role
 
 
 class User(Base):
@@ -33,4 +34,6 @@ class User(Base):
 
     # Relationship to role
     role = relationship("Role", back_populates="users")
+    password_reset_requests = relationship("PasswordReset", back_populates="user", cascade="all, delete-orphan")
+
 

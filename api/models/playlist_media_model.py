@@ -14,5 +14,5 @@ class PlaylistMedia(Base):
     media_id = Column(Integer, ForeignKey('media.media_id', ondelete='CASCADE'), primary_key=True)
 
     # Relationships
-    playlist = relationship("Playlist")
+    playlist = relationship("Playlist", back_populates="playlist_media")
     media = relationship("Media")

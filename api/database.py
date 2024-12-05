@@ -13,12 +13,14 @@ from pymongo import MongoClient
 
 from api import config
 
+
 @lru_cache()
 def get_settings():
     """
     Config settings function.
     """
     return config.Settings()
+
 
 conf_settings = get_settings()
 
@@ -33,6 +35,7 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
+
 
 # Dependency
 def get_db():
